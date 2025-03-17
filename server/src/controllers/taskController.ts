@@ -1,0 +1,90 @@
+import { PrismaClient } from "@prisma/client";
+import { Request, Response } from "express";
+
+const prisma = new PrismaClient();
+
+// GET /api/projects
+export const getTasks = async (req: Request, res: Response): Promise<void> => {
+  const { projectId } = req.query;
+  try {
+    const tasks = await prisma.task.findMany({
+      where: {
+        projectId: Number(projectId),
+      },
+      include: {
+        author: true,
+        assignee: true,
+        comments: true,
+        attachments: true,
+      },
+    });
+    res.json(tasks);
+  } catch (error: any) {
+    res.status(500).json({
+      message: `Error retrieving tasks. Error Message:  ${error.message}`,
+    });
+  }
+};
+
+// POST /api/projects
+export const createTask = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const {
+    title,
+    status,
+    priority,
+    tags,
+    description,
+    startDate,
+    dueDate,
+    points,
+    projectId,
+    authorUserId,
+    assignedUserId,
+  } = req.body;
+  try {
+    const newTask = await prisma.task.create({
+      data: {
+        title,
+        status,
+        priority,
+        tags,
+        description,
+        startDate,
+        dueDate,
+        points,
+        projectId,
+        authorUserId,
+        assignedUserId,
+      },
+    });
+    res.status(201).json(newTask);
+  } catch (error: any) {
+    res.status(500).json({
+      message: `Error creating a task. Error Message:  ${error.message}`,
+    });
+  }
+};
+
+// PUT /api/projects/:id
+export const updateTaskStatus = async (req: Request, res: Response): Promise<void> => {
+  const { taskId } = req.params;
+  const {status} = req.body;
+  try {
+    const updateTask = await prisma.task.update({
+      where: {
+        id: Number(taskId),
+      },
+      data:{
+        status: status
+      }
+    });
+    res.json(updateTask);
+  } catch (error: any) {
+    res.status(500).json({
+      message: `Error updating tasks. Error Message:  ${error.message}`,
+    });
+  }
+};
