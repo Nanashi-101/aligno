@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Tasks as TaskType,
   useGetTasksQuery,
   useUpdateTasksStatusMutation,
 } from "@/state/api";
 import { format } from "date-fns";
-import { EllipsisVertical, MessageSquareCodeIcon, MessageSquareDiff, MessageSquareDiffIcon, PlusCircleIcon } from "lucide-react";
+import { EllipsisVertical, MessageSquareDiff, PlusCircleIcon } from "lucide-react";
 import Image from "next/image";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import image1 from "/i1.jpg";
 
 type BoardProps = {
   id: string;

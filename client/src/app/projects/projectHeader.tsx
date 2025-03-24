@@ -6,14 +6,15 @@ import { Clock1, FilterIcon, Grid3X3Icon, List, Share2Icon, Table2 } from 'lucid
 type IAppProps = {
     activeTab: string;
     setActiveTab: (tab: string) => void;
+    projectName: string | false | undefined;
 }
-function ProjectHeader({ activeTab, setActiveTab }: IAppProps) {
+function ProjectHeader({ activeTab, setActiveTab, projectName }: IAppProps) {
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   return (
     <div className="px-4 xl:px-6">
       {/* Modal */}
       <div className="py-6 lg:pb-4 lg:pt-8">
-        <Header name="Projects" />
+        <Header name={`Project:${projectName} Dashboard`} />
       </div>
       {/* Tabs */}
       <div className="flex flex-wrap-reverse gap-4 md:gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:items-center">
@@ -56,7 +57,7 @@ function ProjectHeader({ activeTab, setActiveTab }: IAppProps) {
               name=""
               id=""
               placeholder="Search Task"
-              className="rounded-md border placeholder:text-gray-200 py-1 pl-10 pr-4 focus:outline-none dark:border-dark-secondary dark:text-neutral-500 dark:placeholder:text-neutral-500"
+              className="rounded-md border placeholder-gray-200 py-1 pl-10 pr-4 focus:outline-none dark:border-dark-secondary dark:text-neutral-500 dark:placeholder-neutral-500"
             />
             <Grid3X3Icon className="absolute left-3 top-2 size-4 text-gray-400 dark:text-neutral-500" />
           </div>
