@@ -14,7 +14,7 @@ function ProjectHeader({ activeTab, setActiveTab, projectName }: IAppProps) {
     <div className="px-4 xl:px-6">
       {/* Modal */}
       <div className="py-6 lg:pb-4 lg:pt-8">
-        <Header name={`Project:${projectName} Dashboard`} />
+        <Header name={`${projectName} Dashboard`} />
       </div>
       {/* Tabs */}
       <div className="flex flex-wrap-reverse gap-4 md:gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:items-center">

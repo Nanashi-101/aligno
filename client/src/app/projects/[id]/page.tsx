@@ -6,6 +6,8 @@ import BoardViewTab from "../BoardView";
 import ListViewTab from "../ListView";
 import ProjectHeader from "../ProjectHeader";
 import { useGetProjectsQuery } from "@/state/api";
+import TimelineViewtab from "../timelineView";
+import TableViewTab from "../tableView";
 
 type IAppProps = {
   params: Promise<{ id: string }>;
@@ -30,6 +32,12 @@ function Projects({ params }: IAppProps) {
       )}
       {activeTab === "List" && (
         <ListViewTab id={id} setIsModalNewsTaskOpen={setIsNewTaskModalOpen} />
+      )}
+      {activeTab === "Timeline" && (
+        <TimelineViewtab id={id} setIsModalNewsTaskOpen={setIsNewTaskModalOpen} />
+      )}
+      {activeTab === "Table" && (
+        <TableViewTab id={id} setIsModalNewsTaskOpen={setIsNewTaskModalOpen} />
       )}
     </div>
   );
