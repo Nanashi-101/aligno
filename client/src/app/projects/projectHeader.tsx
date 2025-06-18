@@ -1,20 +1,42 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react'
-import Header from '../components/header';
-import { Clock1, FilterIcon, Grid3X3Icon, List, Share2Icon, Table2 } from 'lucide-react';
+import React, { useState } from "react";
+import Header from "../components/header";
+import {
+  Clock1,
+  FilterIcon,
+  Grid2x2Plus,
+  Grid3X3Icon,
+  List,
+  Share2Icon,
+  Table2,
+} from "lucide-react";
+import NewProjectModal from "./NewProjectModal";
 
 type IAppProps = {
-    activeTab: string;
-    setActiveTab: (tab: string) => void;
-    projectName: string | false | undefined;
-}
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  projectName: string | false | undefined;
+};
 function ProjectHeader({ activeTab, setActiveTab, projectName }: IAppProps) {
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   return (
     <div className="px-4 xl:px-6">
-      {/* Modal */}
+      <NewProjectModal
+        isOpen={isNewProjectModalOpen}
+        onClose={() => setIsNewProjectModalOpen(false)}
+      />
       <div className="py-6 lg:pb-4 lg:pt-8">
-        <Header name={`${projectName} Dashboard`} />
+        <Header
+          name={`${projectName} Dashboard`}
+          buttonComponent={
+            <button
+              className="flex items-center rounded-md bg-blue-primary px-3 py-2 text-white hover:bg-blue-600 hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer dark:bg-white dark:text-gray-800 dark:hover:bg-gray-200"
+              onClick={() => setIsNewProjectModalOpen(true)}
+            >
+              <Grid2x2Plus className="mr-2 size-5" />
+              New Project Board
+            </button>
+          }
+        />
       </div>
       {/* Tabs */}
       <div className="flex flex-wrap-reverse gap-4 md:gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:items-center">
@@ -72,16 +94,9 @@ type tabButtonProps = {
   icon: React.ReactNode;
   setActiveTab: (tab: string) => void;
   activeTab: string;
-}
+};
 
-
-const TabButton = ({
-  name,
-  icon,
-  setActiveTab,
-  activeTab,
- }: tabButtonProps) => 
-{
+const TabButton = ({ name, icon, setActiveTab, activeTab }: tabButtonProps) => {
   const isActive = activeTab === name;
   return (
     <button
@@ -97,7 +112,6 @@ const TabButton = ({
       {name}
     </button>
   );
+};
 
-}
-
-export default ProjectHeader
+export default ProjectHeader;

@@ -21,7 +21,7 @@ function Projects({ params }: IAppProps) {
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   return (
     <div>
-      {/* New Task Modal */}
+      {/* <NewTaskModal isOpen={isNewTaskModalOpen} onClose={() => setIsNewTaskModalOpen(false)}/> */}
       <ProjectHeader
         activeTab={activeTab}
         setActiveTab={setActiveTab}

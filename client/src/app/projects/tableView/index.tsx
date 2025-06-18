@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Header from "@/app/components/header";
+import { useAppSelector } from "@/app/redux";
+import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
+import { setIsDarkMode } from "@/state";
 import { useGetTasksQuery } from "@/state/api";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import React from "react";
@@ -10,6 +13,7 @@ type TableViewTabProps = {
 };
 
 function TableViewTab({ id, setIsModalNewsTaskOpen }: TableViewTabProps) {
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   const {
     data: tasks,
     isLoading,
@@ -75,14 +79,15 @@ function TableViewTab({ id, setIsModalNewsTaskOpen }: TableViewTabProps) {
   ];
 
   return (
-    <div className="h-[540px] w-full px-4 pb-8 xl:px-6">
+    <div className="h-[540px] w-full px-4 pb-8 xl:px-6 dark:text-white">
       <div className="pt-5">
         <Header name="Table" isSmallText />
       </div>
       <DataGrid
         rows={tasks || []}
         columns={columns}
-        sx={{width: "100%"}}
+        className={dataGridClassNames}
+        sx={dataGridSxStyles(isDarkMode)}
       />
     </div>
   );
