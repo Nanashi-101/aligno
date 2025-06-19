@@ -8,14 +8,14 @@ export interface Projects {
   endDate?: string;
 }
 
-enum Status {
+export enum Status {
   ToDo = "To Do",
   InProgress = "In Progress",
   UnderReview = "Under Review",
   Done = "Done",
 }
 
-enum Priority {
+export enum Priority {
   Urgent = "Urgent",
   High = "High",
   Medium = "Medium",

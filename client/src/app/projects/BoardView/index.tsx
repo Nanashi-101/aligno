@@ -116,7 +116,7 @@ const TaskColumns = ({
               <EllipsisVertical size={26} />
             </button>
             <button
-              className="flex h-6 w-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white cursor-pointer"
+              className="flex h-6 w-6 items-center justify-center rounded dark:text-white cursor-pointer"
               onClick={() => setIsModalNewsTaskOpen(true)}
             >
               <PlusCircleIcon size={18} />

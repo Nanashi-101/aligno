@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { use, useState } from "react";
@@ -8,6 +7,7 @@ import ProjectHeader from "../ProjectHeader";
 import { useGetProjectsQuery } from "@/state/api";
 import TimelineViewtab from "../timelineView";
 import TableViewTab from "../tableView";
+import NewTaskModal from "@/app/components/modalNewtask";
 
 type IAppProps = {
   params: Promise<{ id: string }>;
@@ -21,7 +21,7 @@ function Projects({ params }: IAppProps) {
   const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   return (
     <div>
-      {/* <NewTaskModal isOpen={isNewTaskModalOpen} onClose={() => setIsNewTaskModalOpen(false)}/> */}
+      <NewTaskModal isOpen={isNewTaskModalOpen} onClose={() => setIsNewTaskModalOpen(false)} projectId={parseInt(id)}/>
       <ProjectHeader
         activeTab={activeTab}
         setActiveTab={setActiveTab}
