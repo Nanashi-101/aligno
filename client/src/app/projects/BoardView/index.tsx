@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  Tasks as TaskType,
+  Task as TaskType,
+  useDeleteTaskMutation,
   useGetTasksQuery,
-  useUpdateTasksStatusMutation,
+  useUpdateTaskStatusMutation,
 } from "@/state/api";
 import { format } from "date-fns";
-import { EllipsisVertical, MessageSquareDiff, PlusCircleIcon } from "lucide-react";
+import {
+  EllipsisVertical,
+  MessageSquareDiff,
+  Plus,
+  Trash2
+} from "lucide-react";
 import Image from "next/image";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -25,7 +31,7 @@ function BoardViewTab({ id, setIsModalNewsTaskOpen }: BoardProps) {
     projectId: Number(id),
   });
 
-  const [updateTaskStatus] = useUpdateTasksStatusMutation();
+  const [updateTaskStatus] = useUpdateTaskStatusMutation();
 
   const moveTasks = (taskId: number, toStatus: string) => {
     // move task to new status
@@ -116,10 +122,13 @@ const TaskColumns = ({
               <EllipsisVertical size={26} />
             </button>
             <button
-              className="flex h-6 w-6 items-center justify-center rounded dark:text-white cursor-pointer"
+              className="flex size-8 items-center justify-center rounded dark:text-white cursor-pointer"
               onClick={() => setIsModalNewsTaskOpen(true)}
             >
-              <PlusCircleIcon size={18} />
+              <Plus
+                size={26}
+                className="hover:scale-105 transition-all duration-200 bg-gray-200 dark:bg-dark-tertiary rounded-sm p-1 hover:bg-gray-300 dark:hover:bg-dark-secondary"
+              />
             </button>
           </div>
         </div>
@@ -135,6 +144,10 @@ const TaskColumns = ({
 };
 
 const Task = ({ task }: { task: TaskType }) => {
+  const [deleteTaskMutation] = useDeleteTaskMutation();
+  const HandleDelete = (taskId: number) => {
+    deleteTaskMutation({ taskId: taskId });
+  };
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "task",
     item: { id: task.id },
@@ -202,8 +215,11 @@ const Task = ({ task }: { task: TaskType }) => {
               ))}
             </div>
           </div>
-          <button className="flex h-6 w-4 flex-shrink-0 items-center justify-center dark:text-neutral-500">
-            <EllipsisVertical size={26} />
+          <button className="flex size-6 flex-shrink-0 items-center justify-center dark:text-neutral-500" onClick={() => HandleDelete(task.id)}>
+            <Trash2
+              size={20}
+              className="hover:scale-105 transition-all duration-200 cursor-pointer hover:text-red-500"
+            />
           </button>
         </div>
         <div className="my-3 flex justify-between">
@@ -254,8 +270,10 @@ const Task = ({ task }: { task: TaskType }) => {
             )}
           </div>
           <div className="flex items-center text-gray-500 dark:text-neutral-500">
-            <MessageSquareDiff size={20} className="cursor-pointer"/>
-            <span className="ml-1 text-sm text-gray-500 dark:text-neutral-400">{numberOfComments}</span>
+            <MessageSquareDiff size={20} className="cursor-pointer" />
+            <span className="ml-1 text-sm text-gray-500 dark:text-neutral-400">
+              {numberOfComments}
+            </span>
           </div>
         </div>
       </div>

@@ -37,7 +37,7 @@ function NewProjectModal({
     return projectName && startDate && endDate && description;
   };
 
-  const inputStyes =
+  const inputStyles =
     "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none focus:border-blue-500 focus:ring-blue-500";
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="Create new project board">
@@ -53,7 +53,7 @@ function NewProjectModal({
           name="projectName"
           id=""
           placeholder="Project Name"
-          className={inputStyes}
+          className={inputStyles}
           value={projectName}
           onChange={(e) => setProjectName(e.target.value)}
         />
@@ -61,7 +61,7 @@ function NewProjectModal({
           name="description"
           id=""
           placeholder="Description"
-          className={inputStyes}
+          className={inputStyles}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
@@ -71,7 +71,7 @@ function NewProjectModal({
             name="startDate"
             id=""
             placeholder="Start Date"
-            className={inputStyes}
+            className={inputStyles}
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
           />
@@ -80,7 +80,7 @@ function NewProjectModal({
             name="endDate"
             id=""
             placeholder="End Date"
-            className={inputStyes}
+            className={inputStyles}
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
           />

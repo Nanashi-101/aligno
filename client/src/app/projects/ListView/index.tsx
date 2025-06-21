@@ -1,6 +1,6 @@
 import Header from "@/app/components/header";
 import TaskCard from "@/app/components/taskCard";
-import { useGetTasksQuery, Tasks as TaskType } from "@/state/api";
+import { useGetTasksQuery, Task as TaskType } from "@/state/api";
 import { Plus } from "lucide-react";
 import React from "react";
 

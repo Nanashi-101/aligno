@@ -1,15 +1,19 @@
-import { Tasks } from "@/state/api";
+import { Task, useDeleteTaskMutation } from "@/state/api";
 import { format } from "date-fns";
+import { Trash2 } from "lucide-react";
 import Image from "next/image";
-import React from "react";
 
 type IAppProps = {
-  task: Tasks;
+  task: Task;
 };
 
 function TaskCard({ task }: IAppProps) {
+  const [deleteTaskMutation] = useDeleteTaskMutation();
+  const HandleDelete = () => {
+    deleteTaskMutation({ taskId: task.id });
+  }
   return (
-    <div className="mb-3 rounded bg-white p-4 shadow dark:bg-dark-secondary dark:text-white">
+    <div className="mb-3 relative rounded bg-white p-4 shadow dark:bg-dark-secondary dark:text-white">
       {task.attachments && task.attachments.length > 0 && (
         <div className="">
           <strong>Attachments: </strong>
@@ -67,6 +71,12 @@ function TaskCard({ task }: IAppProps) {
         <strong>Assignee: </strong>
         {task.assignee ? task.assignee.name : "No Assignee"}
       </p>
+      <button className="absolute right-[10px] bottom-[10px]" onClick={() => HandleDelete()}>
+        <Trash2
+          size={18}
+          className="hover:scale-105 transition-all duration-200 cursor-pointer hover:text-red-500"
+        />
+      </button>
     </div>
   );
 }

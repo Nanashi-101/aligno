@@ -9,4 +9,5 @@ router.get('/', taskController_1.getTasks);
 router.post('/', taskController_1.createTask);
 //  PATCH /api/tasks
 router.patch('/:taskId/status', taskController_1.updateTaskStatus);
+router.delete('/:taskId', taskController_1.deleteTask);
 exports.default = router;

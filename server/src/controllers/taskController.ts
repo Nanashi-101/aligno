@@ -33,10 +33,10 @@ export const createTask = async (
 ): Promise<void> => {
   const {
     title,
+    description,
     status,
     priority,
     tags,
-    description,
     startDate,
     dueDate,
     points,
@@ -88,3 +88,19 @@ export const updateTaskStatus = async (req: Request, res: Response): Promise<voi
     });
   }
 };
+
+export const deleteTask = async (req: Request, res: Response): Promise<void> => {
+  const { taskId } = req.params;
+  try {
+    await prisma.task.delete({
+      where: {
+        id: Number(taskId),
+      },
+    });
+    res.status(204).send();
+  } catch (error: any) {
+    res.status(500).json({
+      message: `Error deleting task. Error Message:  ${error.message}`,
+    });
+  }
+}

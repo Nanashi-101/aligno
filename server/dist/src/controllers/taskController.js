@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTaskStatus = exports.createTask = exports.getTasks = void 0;
+exports.deleteTask = exports.updateTaskStatus = exports.createTask = exports.getTasks = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 // GET /api/projects
@@ -38,7 +38,7 @@ const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getTasks = getTasks;
 // POST /api/projects
 const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, status, priority, tags, description, startDate, dueDate, points, projectId, authorUserId, assignedUserId, } = req.body;
+    const { title, description, status, priority, tags, startDate, dueDate, points, projectId, authorUserId, assignedUserId, } = req.body;
     try {
         const newTask = yield prisma.task.create({
             data: {
@@ -86,3 +86,20 @@ const updateTaskStatus = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.updateTaskStatus = updateTaskStatus;
+const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { taskId } = req.params;
+    try {
+        yield prisma.task.delete({
+            where: {
+                id: Number(taskId),
+            },
+        });
+        res.status(204).send();
+    }
+    catch (error) {
+        res.status(500).json({
+            message: `Error deleting task. Error Message:  ${error.message}`,
+        });
+    }
+});
+exports.deleteTask = deleteTask;

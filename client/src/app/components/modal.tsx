@@ -24,10 +24,10 @@ function Modal({
           name={name}
           buttonComponent={
             <button
-              className="flex size-7 items-center justify-center rounded-full bg-blue-primary text-white hover:bg-blue-600"
+              className="flex size-8 items-center justify-center rounded-full bg-blue-primary text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600"
               onClick={onClose}
             >
-              <X className="size-18" />
+              <X size={32} className="p-1.5"/>
             </button>
           }
         />

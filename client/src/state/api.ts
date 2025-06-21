@@ -12,7 +12,7 @@ export enum Status {
   ToDo = "To Do",
   InProgress = "In Progress",
   UnderReview = "Under Review",
-  Done = "Done",
+  Completed = "Completed",
 }
 
 export enum Priority {
@@ -40,7 +40,7 @@ export interface Attachment {
   uploadedById?: number;
 }
 
-export interface Tasks {
+export interface Task {
   id: number;
   title: string;
   status?: Status;
@@ -77,14 +77,14 @@ export const api = createApi({
       }),
       invalidatesTags: ["Projects"],
     }),
-    getTasks: build.query<Tasks[], { projectId: number }>({
+    getTasks: build.query<Task[], { projectId: number }>({
       query: ({ projectId }) => `tasks?projectId=${projectId}`,
       providesTags: (result) =>
         result
           ? result.map(({ id }) => ({ type: "Tasks" as const, id }))
           : [{ type: "Tasks" as const }],
     }),
-    createTasks: build.mutation<Tasks, Partial<Tasks>>({
+    createTasks: build.mutation<Task, Partial<Task>>({
       query: (task) => ({
         url: "tasks",
         method: "POST",
@@ -92,21 +92,25 @@ export const api = createApi({
       }),
       invalidatesTags: ["Tasks"],
     }),
-    updateTasksStatus: build.mutation<
-      Tasks,
-      { taskId: number; status: string }
-    >({
+    updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
       query: ({ taskId, status }) => ({
         url: `tasks/${taskId}/status`,
         method: "PATCH",
-        body: {
-          status,
-        },
+        body: { status },
       }),
       invalidatesTags: (result, error, { taskId }) => [
         { type: "Tasks", id: taskId },
       ],
     }),
+    deleteTask: build.mutation<Task, { taskId: number }>({
+      query: ({ taskId }) => ({
+        url: `tasks/${taskId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, { taskId }) => [
+        { type: "Tasks", id: taskId },
+      ],
+    })
   }),
 });
 
@@ -115,5 +119,6 @@ export const {
   useCreateProjectMutation,
   useGetTasksQuery,
   useCreateTasksMutation,
-  useUpdateTasksStatusMutation
+  useUpdateTaskStatusMutation,
+  useDeleteTaskMutation,
 } = api;
