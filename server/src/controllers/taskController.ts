@@ -69,17 +69,20 @@ export const createTask = async (
 };
 
 // PUT /api/projects/:id
-export const updateTaskStatus = async (req: Request, res: Response): Promise<void> => {
+export const updateTaskStatus = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { taskId } = req.params;
-  const {status} = req.body;
+  const { status } = req.body;
   try {
     const updateTask = await prisma.task.update({
       where: {
         id: Number(taskId),
       },
-      data:{
-        status: status
-      }
+      data: {
+        status: status,
+      },
     });
     res.json(updateTask);
   } catch (error: any) {
@@ -89,7 +92,10 @@ export const updateTaskStatus = async (req: Request, res: Response): Promise<voi
   }
 };
 
-export const deleteTask = async (req: Request, res: Response): Promise<void> => {
+export const deleteTask = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { taskId } = req.params;
   try {
     await prisma.task.delete({
@@ -103,4 +109,4 @@ export const deleteTask = async (req: Request, res: Response): Promise<void> => 
       message: `Error deleting task. Error Message:  ${error.message}`,
     });
   }
-}
+};

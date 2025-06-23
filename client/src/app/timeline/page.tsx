@@ -30,7 +30,7 @@ function Timeline() {
     return projects?.map((project) => ({
       start: new Date(project.startDate as string),
       end: new Date(project.endDate as string),
-      name: project.name,
+      name: project.name ?? "Untitled Project",
       id: `project-${project.id}`,
       type: "project" as TaskTypeItems,
       progress: 50,

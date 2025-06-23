@@ -6,6 +6,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import projectRoutes from "./routes/projectRoutes"
 import taskRoutes from "./routes/taskRoutes"
+import searchRoutes from "./routes/searchRoutes";
 
 // ROUTE IMPORTS
 
@@ -31,6 +32,9 @@ app.use('/projects', projectRoutes)
 
 //  TASK ROUTES
 app.use('/tasks', taskRoutes)
+
+//  SEARCH ROUTES
+app.use('/search', searchRoutes)
 
 // SERVER
 const PORT = process.env.PORT || 5000;

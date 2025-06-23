@@ -74,8 +74,8 @@ const updateTaskStatus = (req, res) => __awaiter(void 0, void 0, void 0, functio
                 id: Number(taskId),
             },
             data: {
-                status: status
-            }
+                status: status,
+            },
         });
         res.json(updateTask);
     }
