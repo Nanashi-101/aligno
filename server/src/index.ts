@@ -7,6 +7,7 @@ import helmet from "helmet";
 import projectRoutes from "./routes/projectRoutes"
 import taskRoutes from "./routes/taskRoutes"
 import searchRoutes from "./routes/searchRoutes";
+import userRoutes from "./routes/userRoutes";
 
 // ROUTE IMPORTS
 
@@ -35,6 +36,9 @@ app.use('/tasks', taskRoutes)
 
 //  SEARCH ROUTES
 app.use('/search', searchRoutes)
+
+//  USER ROUTES
+app.use('/users', userRoutes)
 
 // SERVER
 const PORT = process.env.PORT || 5000;

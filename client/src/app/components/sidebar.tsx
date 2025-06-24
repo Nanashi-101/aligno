@@ -81,8 +81,8 @@ function Sidebar() {
           <SideBarLinks icon={Home} href="/" label="Home" />
           <SideBarLinks icon={Briefcase} href="/timeline" label="Timeline" />
           <SideBarLinks icon={Search} href="/search" label="Search" />
-          <SideBarLinks icon={Settings} href="/settings" label="Settings" />
-          <SideBarLinks icon={User} href="/profiles" label="Profiles" />
+          <SideBarLinks icon={Settings} href="/userSettings" label="Settings" />
+          <SideBarLinks icon={User} href="/users" label="Profiles" />
           <SideBarLinks icon={Users} href="/teams" label="Teams" />
         </nav>
 
