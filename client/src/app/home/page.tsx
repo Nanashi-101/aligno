@@ -10,7 +10,7 @@ import {
 } from "@/state/api";
 import React from "react";
 import { useAppSelector } from "../redux";
-import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Header from "../components/header";
 import {
   Bar,
@@ -25,6 +25,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 
 const HomePage = () => {
   const {
@@ -99,9 +100,9 @@ const HomePage = () => {
       };
 
   return (
-    <div className="container h-full w-[100%] bg-transparent p-8">
+    <div className="container h-full w-[100%] bg-transparent p-8 mx-auto flex flex-col gap-4">
       <Header name="Project Management Dashboard" />
-      <div className="gird grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
         <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
           <h3 className="mb-4 text-lg font-semibold dark:text-white">
             Task Priority Distribution
@@ -131,12 +132,7 @@ const HomePage = () => {
           </h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
-              <Pie
-                dataKey="count"
-                data={projectStatus}
-                fill="#82ca9d"
-                label
-              >
+              <Pie dataKey="count" data={projectStatus} fill="#82ca9d" label>
                 {projectStatus.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
@@ -144,10 +140,25 @@ const HomePage = () => {
                   />
                 ))}
               </Pie>
-              <Tooltip/>
+              <Tooltip />
               <legend />
             </PieChart>
           </ResponsiveContainer>
+        </div>
+      </div>
+      <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
+        <h3 className="mb-4 text-lg font-semibold dark:text-white">
+          Your tasks
+        </h3>
+        <div className="" style={{ height: 300, width: "100%" }}>
+          <DataGrid
+            rows={tasks}
+            columns={taskColumns}
+            checkboxSelection
+            loading={isTaskLoading}
+            className={dataGridClassNames}
+            sx={dataGridSxStyles(isDarkMode)}
+          />
         </div>
       </div>
     </div>
