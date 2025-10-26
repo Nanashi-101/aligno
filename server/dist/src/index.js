@@ -13,6 +13,7 @@ const projectRoutes_1 = __importDefault(require("./routes/projectRoutes"));
 const taskRoutes_1 = __importDefault(require("./routes/taskRoutes"));
 const searchRoutes_1 = __importDefault(require("./routes/searchRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const teamRoutes_1 = __importDefault(require("./routes/teamRoutes"));
 // ROUTE IMPORTS
 // CONFIGURE
 dotenv_1.default.config();
@@ -36,6 +37,8 @@ app.use('/tasks', taskRoutes_1.default);
 app.use('/search', searchRoutes_1.default);
 //  USER ROUTES
 app.use('/users', userRoutes_1.default);
+// TEAM ROUTES
+app.use('/teams', teamRoutes_1.default);
 // SERVER
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

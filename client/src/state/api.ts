@@ -69,7 +69,7 @@ export interface searchResults {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["Projects", "Tasks", "Users"],
+  tagTypes: ["Projects", "Tasks", "Users", "Teams"],
   endpoints: (build) => ({
     // GET Queries
     getProjects: build.query<Projects[], void>({
@@ -86,6 +86,10 @@ export const api = createApi({
     getUsers: build.query<User[], void>({
       query: () => "users",
       providesTags: ["Users"],
+    }),
+    getTeams: build.query<User[], void>({
+      query: () => "teams",
+      providesTags: ["Teams"],
     }),
     // POST or PATCH Mutations
     createProject: build.mutation<Projects, Partial<Projects>>({
@@ -139,4 +143,5 @@ export const {
   useDeleteTaskMutation,
   useSearchQuery,
   useGetUsersQuery,
+  useGetTeamsQuery,
 } = api;

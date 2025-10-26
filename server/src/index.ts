@@ -8,6 +8,7 @@ import projectRoutes from "./routes/projectRoutes"
 import taskRoutes from "./routes/taskRoutes"
 import searchRoutes from "./routes/searchRoutes";
 import userRoutes from "./routes/userRoutes";
+import teamRoutes from "./routes/teamRoutes";
 
 // ROUTE IMPORTS
 
@@ -39,6 +40,9 @@ app.use('/search', searchRoutes)
 
 //  USER ROUTES
 app.use('/users', userRoutes)
+
+// TEAM ROUTES
+app.use('/teams', teamRoutes)
 
 // SERVER
 const PORT = process.env.PORT || 5000;
