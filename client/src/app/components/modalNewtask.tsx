@@ -173,7 +173,7 @@ function ModalNewTask({
           <input
             type="text"
             className={inputStyles}
-            placeholder="ProjectId"
+            placeholder="Project ID"
             value={projectId}
             onChange={(e) => setProjectId(e.target.value)}
           />

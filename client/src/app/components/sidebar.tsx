@@ -162,11 +162,11 @@ const SideBarLinks = ({ href, icon: Icon, label }: SideBarLinksProps) => {
 const Priorities = () => {
   return (
     <>
-      <SideBarLinks icon={AlertCircle} label="Urgent" href="/urgent" />
-      <SideBarLinks icon={ShieldAlert} label="High" href="/high" />
-      <SideBarLinks icon={AlertTriangle} label="Medium" href="/medium" />
-      <SideBarLinks icon={AlertOctagon} label="Low" href="/low" />
-      <SideBarLinks icon={Layers3} label="Backlog" href="/backlog" />
+      <SideBarLinks icon={AlertCircle} label="Urgent" href="/priority/urgent" />
+      <SideBarLinks icon={ShieldAlert} label="High" href="/priority/high" />
+      <SideBarLinks icon={AlertTriangle} label="Medium" href="/priority/medium" />
+      <SideBarLinks icon={AlertOctagon} label="Low" href="/priority/low" />
+      <SideBarLinks icon={Layers3} label="Backlog" href="/priority/backlog" />
     </>
   );
 };
