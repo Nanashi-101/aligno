@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
     headerName: "Status",
     width: 130,
     renderCell: (params) => (
-      <span className="inline-flex rounded-full bg-violet-100 px-2 text-xs font-semibold leading-5 text-violet-800">
+      <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
         {params.value}
       </span>
     ),
@@ -42,17 +42,17 @@ const columns: GridColDef[] = [
   {
     field: "tags",
     headerName: "Tags",
-    width: 140,
+    width: 130,
   },
   {
     field: "startDate",
     headerName: "Start Date",
-    width: 140,
+    width: 130,
   },
   {
     field: "dueDate",
     headerName: "Due Date",
-    width: 140,
+    width: 130,
   },
   {
     field: "author",
@@ -64,7 +64,7 @@ const columns: GridColDef[] = [
     field: "assignee",
     headerName: "Assignee",
     width: 150,
-    renderCell: (params) => params.value.username || "Unknown",
+    renderCell: (params) => params.value.username || "Unassigned",
   },
 ];
 
@@ -72,27 +72,31 @@ const ReusablePriorityPage = ({ priority }: Props) => {
   const [view, setView] = useState("list");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
-  const userId = 10; // Replace with actual user ID
+  // const { data: currentUser } = useGetAuthUserQuery({});
+  const userId = 1; // currentUser?.userDetails?.userId ?? null;
   const {
     data: tasks,
     isLoading,
-    isError: isTaskError,
+    isError: isTasksError,
   } = useGetTasksByUserQuery(userId | 0, {
     skip: userId === null,
   });
 
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
-  const filteredTasks = tasks?.filter(
-    (task: Task) => (
-      console.log("Checking Task:", task.priority, "against", priority),
-      task.priority?.toUpperCase() === priority.toUpperCase()
-    )
+  console.log(tasks)
+
+  const filteredTasks = tasks?.map((task: Task)=>{
+    console.log(task.priority);
+    return task;
+  }
+    // (task: Task) => task.priority === priority;
   );
+
+  if (isTasksError || !tasks) return <div>Error fetching tasks</div>;
 
   console.log("Filtered Tasks:", filteredTasks, priority);
 
-  if (isTaskError || !tasks) return <div>Error loading tasks.</div>;
   if (isLoading) return <div>Loading tasks...</div>;
   return (
     <div className="m-4 p-8">

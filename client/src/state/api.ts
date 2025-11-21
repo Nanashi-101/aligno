@@ -95,11 +95,8 @@ export const api = createApi({
       query: (userId) => `tasks/user/${userId}`,
       providesTags: (result, error, userId) =>
         result
-          ? result.map(({ id }) => ({
-              type: "Tasks" as const,
-              id,
-            }))
-          : [{ type: "Tasks" as const, id: userId }],
+          ? result.map(({ id }) => ({ type: "Tasks", id }))
+          : [{ type: "Tasks", id: userId }],
     }),
     // POST or PATCH Mutations
     createProject: build.mutation<Projects, Partial<Projects>>({

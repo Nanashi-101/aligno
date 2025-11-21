@@ -109,11 +109,9 @@ const getUserTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const tasks = yield prisma.task.findMany({
             where: {
                 OR: [
-                    {
-                        authorUserId: Number(userId),
-                        assignedUserId: Number(userId),
-                    }
-                ]
+                    { authorUserId: Number(userId) },
+                    { assignedUserId: Number(userId) },
+                ],
             },
             include: {
                 author: true,
@@ -123,9 +121,9 @@ const getUserTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.json(tasks);
     }
     catch (error) {
-        res.status(500).json({
-            message: `Error retrieving Users. Error Message:  ${error.message}`,
-        });
+        res
+            .status(500)
+            .json({ message: `Error retrieving user's tasks: ${error.message}` });
     }
 });
 exports.getUserTasks = getUserTasks;
