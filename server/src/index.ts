@@ -4,8 +4,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
-import projectRoutes from "./routes/projectRoutes"
-import taskRoutes from "./routes/taskRoutes"
+import projectRoutes from "./routes/projectRoutes";
+import taskRoutes from "./routes/taskRoutes";
 import searchRoutes from "./routes/searchRoutes";
 import userRoutes from "./routes/userRoutes";
 import teamRoutes from "./routes/teamRoutes";
@@ -47,5 +47,5 @@ app.use('/teams', teamRoutes)
 // SERVER
 const port = Number(process.env.PORT) || 5000;
 app.listen(port, "0.0.0.0", () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
