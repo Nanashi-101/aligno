@@ -26,7 +26,7 @@ app.use(morgan("common"));
 
 // ROUTES
 app.get("/", (req, res) => {
-    res.send("Welcome to Project Manager API");
+    res.send("Welcome to Aligno Project Manager");
 });
 
 //  PROJECT ROUTES
@@ -45,7 +45,7 @@ app.use('/users', userRoutes)
 app.use('/teams', teamRoutes)
 
 // SERVER
-const PORT = Number(process.env.PORT) || 5000;
-app.listen(PORT, "0.0.0.0", () => {
+const port = Number(process.env.PORT) || 5000;
+app.listen(port, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
 });
